@@ -5,20 +5,26 @@ import (
 	"strings"
 )
 
+//minPrintItemLen - minimal content length in row (for example - 0.00% is 5 symbols)
+//used to calculate spaces between cells
 const minPrintItemLen = 5
 
+//Table is used to draw info in "table" form to stdout
 type Table struct {
 	Header []string
 }
 
+//DrawHeader will print table header
 func (t *Table) DrawHeader() {
 	log.Printf(strings.Join(t.Header, "    "))
 }
 
+//DrawRow will print table row
 func (t *Table) DrawRow(cells []string) {
 	log.Println(t.formatRow(cells))
 }
 
+//formatRow is used to prepare row data (calculate spaces count between cells)
 func (t *Table) formatRow(cells []string) string {
 	emptyString := func(len int) string {
 		return strings.Join(make([]string, len), " ")
